@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class SearchActivity extends AppCompatActivity {
+public class FoodOrClothesActivity extends AppCompatActivity {
     ImageView homeNB;
     ImageView locationNB;
     ImageView photoNB;
@@ -19,14 +19,11 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-
+        setContentView(R.layout.activity_food_or_clothes);
         homeNB  = (ImageView) findViewById(R.id.iv_home);
         locationNB = (ImageView) findViewById(R.id.iv_location);
         photoNB = (ImageView) findViewById(R.id.iv_photo);
         mainNB = (ImageView) findViewById(R.id.iv_user);
-        foodBT = (Button) findViewById(R.id.women);
-        clothesBT = (Button) findViewById(R.id.men);
 
         homeNB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,50 +49,50 @@ public class SearchActivity extends AppCompatActivity {
                 userScene();
             }
         });
-        foodBT.setOnClickListener(new View.OnClickListener() {
+   /*     foodBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 foodScene();
             }
         });
+
         clothesBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clothesScene();
             }
         });
-
+*/
 
     }
 
     private void homeScene(){
-        Intent intent = new Intent(SearchActivity.this, HomeActivity.class);
+        Intent intent = new Intent(FoodOrClothesActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
     private void photoScene(){
-        Intent intent = new Intent(SearchActivity.this, PhotoActivity.class);
+        Intent intent = new Intent(FoodOrClothesActivity.this, PhotoActivity.class);
         startActivity(intent);
         finish();
     }
     private void locationScene(){
-        Intent intent = new Intent(SearchActivity.this, LocationActivity.class);
+        Intent intent = new Intent(FoodOrClothesActivity.this, LocationActivity.class);
         startActivity(intent);
         finish();
     }
     private void userScene(){
-        Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+        Intent intent = new Intent(FoodOrClothesActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
-
     private void foodScene(){
-        Intent intent = new Intent(SearchActivity.this, FoodSearch.class);
+        Intent intent = new Intent(FoodOrClothesActivity.this, FoodSearch.class);
         startActivity(intent);
         finish();
     }
     private void clothesScene(){
-        Intent intent = new Intent(SearchActivity.this, ClothesSearch.class);
+        Intent intent = new Intent(FoodOrClothesActivity.this, ClothesSearch.class);
         startActivity(intent);
         finish();
     }

@@ -11,4 +11,7 @@ public class AppConfig {
 
 	public static final String IMAGES_URL = "http://192.168.94.1/AndroidImageUpload/getImages.php";
 
+	public static String get_name(){
+		return "FoodOrClothesActivity";
+	}
 }

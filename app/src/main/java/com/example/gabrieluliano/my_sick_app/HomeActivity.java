@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+
 public class HomeActivity extends AppCompatActivity {
 
     ImageView locationNB;
@@ -53,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void searchScene(){
-        Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+        Intent intent = new Intent(HomeActivity.this, FoodOrClothesActivity.class);
         startActivity(intent);
         finish();
     }

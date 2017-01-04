@@ -56,7 +56,7 @@ public class LocationActivity extends AppCompatActivity {
         finish();
     }
     private void searchScene(){
-        Intent intent = new Intent(LocationActivity.this, SearchActivity.class);
+        Intent intent = new Intent(LocationActivity.this, FoodOrClothesActivity.class);
         startActivity(intent);
         finish();
     }

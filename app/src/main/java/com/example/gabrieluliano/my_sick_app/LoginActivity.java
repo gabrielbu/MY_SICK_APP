@@ -27,8 +27,6 @@ import java.util.Map;
 
 
 
-
-
 public class LoginActivity extends Activity {
     private static final String TAG = RegisterActivity.class.getSimpleName();
     private Button btnLogin;
@@ -38,7 +36,6 @@ public class LoginActivity extends Activity {
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,7 +97,6 @@ public class LoginActivity extends Activity {
             }
         });
 
-
     }
 
     /**
@@ -113,7 +109,8 @@ public class LoginActivity extends Activity {
         pDialog.setMessage("Logging in ...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Method.POST, AppConfig.URL_LOGIN, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Method.POST,
+                AppConfig.URL_LOGIN, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
