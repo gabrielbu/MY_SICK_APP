@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteHandler db;
     private SessionManager session;
 
+    private String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> user = db.getUserDetails();
         String name = user.get("name");
         String email = user.get("email");
+        userID= user.get("id");
 
         // Display user name and email
         txtName.setText(name);

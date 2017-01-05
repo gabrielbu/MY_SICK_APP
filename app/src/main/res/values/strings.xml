@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">MY SICK APP</string>
+
+    <string-array name="mens_clothing">
+        <item>Blazers and Suits</item>
+        <item>Boots</item>
+        <item>Cardigans and Jumpers</item>
+        <item>Formal Shoes</item>
+        <item>Hoodies and Sweatshirts</item>
+        <item>Jackets and Coats</item>
+        <item>Jeans</item>
+        <item>Shirts</item>
+        <item>Shoes and Suits</item>
+        <item>Shorts</item>
+        <item>Socks</item>
+        <item>Swimwear</item>
+        <item>T-shirts and Polos</item>
+        <item>Trainers</item>
+        <item>Trousers</item>
+        <item>Underwear</item>
+
+    </string-array>
 </resources>
