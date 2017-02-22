@@ -92,7 +92,8 @@
         <activity android:name=".ClothesSearchM" />
         <activity android:name=".ClothesSearchF" />
         <activity android:name=".SelectCategory" />
-
+        <activity android:name=".SearchList" />
+        <activity android:name=".SearchSelected" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -100,7 +101,7 @@
 
         <service android:name=".GPS_Service" />
 
-        <activity android:name=".SelectCategory"></activity>
+
     </application>
 
 </manifest>

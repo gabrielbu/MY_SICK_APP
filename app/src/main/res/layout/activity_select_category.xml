@@ -16,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="530dp">
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/upload">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -82,6 +82,19 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="60dp"
         android:layout_marginTop="153dp"
-        android:id="@+id/printinfo" />
+        android:id="@+id/printinfo"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="64dp" />
+
+    <Button
+        android:text="upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/printinfo"
+        android:layout_alignStart="@+id/printinfo"
+        android:layout_marginTop="13dp"
+        android:id="@+id/upload"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="64dp" />
 
 </RelativeLayout>

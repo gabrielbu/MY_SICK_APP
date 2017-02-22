@@ -10,4 +10,42 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.gabrieluliano.my_sick_app.ClothesSearchM">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+
+        android:id="@+id/imageView"
+        android:layout_marginTop="64dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/buttonPrev"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:text="next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/buttonPrev"
+        android:id="@+id/buttonNext"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="206dp"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Fetch Images"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonFetchImages"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonPrev"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="206dp" />
 </RelativeLayout>

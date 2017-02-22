@@ -14,7 +14,7 @@ public class FoodOrClothesActivity extends AppCompatActivity {
     ImageView mainNB;
     Button foodBT;
     Button clothesBT;
-
+    Button men;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class FoodOrClothesActivity extends AppCompatActivity {
         locationNB = (ImageView) findViewById(R.id.iv_location);
         photoNB = (ImageView) findViewById(R.id.iv_photo);
         mainNB = (ImageView) findViewById(R.id.iv_user);
+        men = (Button) findViewById(R.id.men);
 
         homeNB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +50,14 @@ public class FoodOrClothesActivity extends AppCompatActivity {
                 userScene();
             }
         });
+        men.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menScene();
+            }
+
+
+        });
    /*     foodBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +73,12 @@ public class FoodOrClothesActivity extends AppCompatActivity {
         });
 */
 
+    }
+
+    private void menScene() {
+        Intent intent = new Intent(FoodOrClothesActivity.this, ClothesSearchM.class);
+        startActivity(intent);
+        finish();
     }
 
     private void homeScene(){

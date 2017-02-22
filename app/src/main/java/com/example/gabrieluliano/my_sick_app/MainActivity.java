@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
     private void searchScene(){
-        Intent intent = new Intent(MainActivity.this, FoodOrClothesActivity.class);
+        Intent intent = new Intent(MainActivity.this, SearchList.class);
         startActivity(intent);
         finish();
     }

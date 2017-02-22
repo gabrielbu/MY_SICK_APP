@@ -59,7 +59,9 @@ import java.util.Map;
 
 import java.util.UUID;
 
-public class PhotoActivity extends FragmentActivity implements OnMapReadyCallback {
+import static com.example.gabrieluliano.app.AppConfig.URL_UPLOAD;
+
+public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallback {
     ImageView homeNB;
     ImageView locationNB;
     ImageView mainNB;
@@ -70,7 +72,8 @@ public class PhotoActivity extends FragmentActivity implements OnMapReadyCallbac
     private Bitmap bitmap;
     private File file;
     private Uri file_uri;
-    private static final String POST_URL = "http://ec2-54-171-67-69.eu-west-1.compute.amazonaws.com/sendtest.php";
+    private static final String POST_URL = "http://ec2-54-194-183-72.eu-west-1.compute.amazonaws.com/sendtest.php";
+
     private static final int STORAGE_PERMISSION_CODE = 100;
     private static final int CAMERA_PERMISSION_CODE = 101;
     private static final int LOCATION_PERMISSION_CODE = 102;
@@ -95,6 +98,8 @@ public class PhotoActivity extends FragmentActivity implements OnMapReadyCallbac
     String imageName;
     String Coordinate;
 
+    ImageView mImageView;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +108,7 @@ public class PhotoActivity extends FragmentActivity implements OnMapReadyCallbac
         btn1 = (Button)findViewById(R.id.but1);
         btn2 = (Button)findViewById(R.id.but2);
         textView = (TextView)findViewById(R.id.textView3);
+        mImageView = (ImageView)findViewById(R.id.imageView);
 /*
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -273,42 +279,8 @@ public class PhotoActivity extends FragmentActivity implements OnMapReadyCallbac
             makeRequest();
         }
     }
-
-    private void getFileUri() {
-        String uuid = UUID.randomUUID().toString();
-        imageName=uuid;
-
-        image_name = uuid + ".jpg";
-        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                + File.separator + image_name
-        );
-
-        file_uri = Uri.fromFile(file);
-    }
-
-    //###################################################################
-
-
-
-
-    //################### REQUESTS AND RESPONSES ##############################
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == 10 && resultCode == RESULT_OK) {
-            new PhotoActivity.Encode_image().execute();
-        }
-    }
-
-    private boolean requestLocation() {
-        if (Build.VERSION.SDK_INT>=23 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},LOCATION_PERMISSION_CODE);
-            return true;
-        }
-        return false;
-    }
-
     private void makeRequest() {
+        System.out.println(encoded_string);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, POST_URL,
                 new Response.Listener<String>() {
@@ -333,6 +305,49 @@ public class PhotoActivity extends FragmentActivity implements OnMapReadyCallbac
         };
         requestQueue.add(request);
     }
+
+    private void getFileUri() {
+        String uuid = UUID.randomUUID().toString();
+        imageName=uuid;
+
+        image_name = uuid + ".jpg";
+        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                + File.separator + image_name
+        );
+
+        file_uri = Uri.fromFile(file);
+    }
+
+
+    //###################################################################
+
+
+
+
+    //################### REQUESTS AND RESPONSES ##############################
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 10 && resultCode == RESULT_OK) {
+            new PhotoActivity.Encode_image().execute();
+            //////
+
+          //  Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+          //  mImageView.setImageBitmap(imageBitmap);
+            //////
+
+        }
+    }
+
+    private boolean requestLocation() {
+        if (Build.VERSION.SDK_INT>=23 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},LOCATION_PERMISSION_CODE);
+            return true;
+        }
+        return false;
+    }
+
+
 
     private void requestStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)

@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="456dp"
+        android:layout_marginTop="502dp"
         android:layout_alignParentTop="true">
 
         <ImageView
