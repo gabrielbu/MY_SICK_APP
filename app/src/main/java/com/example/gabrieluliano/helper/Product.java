@@ -1,4 +1,4 @@
-package com.example.gabrieluliano.my_sick_app;
+package com.example.gabrieluliano.helper;
 
 /**
  * Created by gabrieluliano on 15/02/2017.
@@ -10,13 +10,21 @@ public class Product {
     private String category;
     private String locationX;
     private String locationY;
+    private String title;
+    private String brand;
+    private String colour;
+    private String userName;
 
-    public Product(String image, String userID, String category, String locationX, String locationY) {
+    public Product(String image, String userID, String category, String locationX, String locationY, String title, String brand, String colour, String userName) {
         this.image = image;
         this.userID = userID;
         this.category = category;
         this.locationX = locationX;
         this.locationY = locationY;
+        this.title = title;
+        this.brand = brand;
+        this.colour = colour;
+        this.userName = userName;
     }
 
     public String getImage() {
@@ -54,6 +62,38 @@ public class Product {
     }
     public void setLocationY(String locationY){
         this.locationY = locationY;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
 }

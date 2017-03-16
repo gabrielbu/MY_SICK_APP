@@ -1,4 +1,4 @@
-package com.example.gabrieluliano.my_sick_app;
+package com.example.gabrieluliano.my_sick_app.other;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -9,7 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.example.gabrieluliano.my_sick_app.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

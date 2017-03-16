@@ -1,4 +1,4 @@
-package com.example.gabrieluliano.my_sick_app;
+package com.example.gabrieluliano.my_sick_app.search;
 
 /**
  * Created by gabrieluliano on 15/02/2017.
@@ -9,7 +9,16 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+
+import com.example.gabrieluliano.helper.CustomListAdapter;
+import com.example.gabrieluliano.my_sick_app.home.HomeActivity;
+import com.example.gabrieluliano.my_sick_app.location.LocationActivity;
+import com.example.gabrieluliano.my_sick_app.home.MainActivity;
+import com.example.gabrieluliano.helper.Product;
+import com.example.gabrieluliano.my_sick_app.R;
+import com.example.gabrieluliano.my_sick_app.photo.PhotoActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +32,10 @@ import java.util.ArrayList;
 
 public class SearchList extends AppCompatActivity {
 
+    ImageView homeNB;
+    ImageView locationNB;
+    ImageView photoNB;
+    ImageView mainNB;
         ArrayList<Product> arrayList;
         ListView lv;
 
@@ -30,15 +43,54 @@ public class SearchList extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_search_list);
+
+            Bundle b = getIntent().getExtras();
+            final String category = b.getString("category");
+            final String brand = b.getString("brand");
+            final String colour = b.getString("colour");
+
+            homeNB  = (ImageView) findViewById(R.id.iv_home);
+            locationNB = (ImageView) findViewById(R.id.iv_location);
+            photoNB = (ImageView) findViewById(R.id.iv_photo);
+            mainNB = (ImageView) findViewById(R.id.iv_user);
+
+            homeNB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    homeScene();
+                }
+            });
+            locationNB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    locationScene();
+                }
+            });
+            photoNB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    photoScene();
+                }
+            });
+            mainNB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    userScene();
+                }
+            });
             arrayList = new ArrayList<>();
             lv = (ListView) findViewById(R.id.listView);
 
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    new ReadJSON().execute("http://ec2-54-194-183-72.eu-west-1.compute.amazonaws.com/images/get/images.php");
+                    //new ReadJSON().execute("http://ec2-54-194-183-72.eu-west-1.compute.amazonaws.com/images/get/images.php?category="+category+"&brand="+brand+"&colour="+colour);
+                    new ReadJSON().execute("http://ec2-54-194-183-72.eu-west-1.compute.amazonaws.com/images/get/images.php?category="+category);
+
                 }
             });
+
+
         }
 
         class ReadJSON extends AsyncTask<String, Integer, String> {
@@ -61,7 +113,11 @@ public class SearchList extends AppCompatActivity {
                                 productObject.getString("userID"),
                                 productObject.getString("category"),
                                 productObject.getString("locationX"),
-                                productObject.getString("locationY")
+                                productObject.getString("locationY"),
+                                productObject.getString("title"),
+                                productObject.getString("brand"),
+                                productObject.getString("colour"),
+                                productObject.getString("username")
                         ));
                     }
                 } catch (JSONException e) {
@@ -99,8 +155,29 @@ public class SearchList extends AppCompatActivity {
             }
             return content.toString();
         }
+
+    private void homeScene(){
+        Intent intent = new Intent(SearchList.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    private void photoScene(){
+        Intent intent = new Intent(SearchList.this, PhotoActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    private void locationScene(){
+        Intent intent = new Intent(SearchList.this, LocationActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    private void userScene(){
+        Intent intent = new Intent(SearchList.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
     }
 
 
 
-
+//

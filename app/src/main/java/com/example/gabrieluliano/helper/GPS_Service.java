@@ -1,4 +1,4 @@
-package com.example.gabrieluliano.my_sick_app;
+package com.example.gabrieluliano.helper;
 
 import android.app.Service;
 import android.content.Context;

@@ -9,13 +9,16 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.gabrieluliano.my_sick_app.ClothesSearch">
+    tools:context="com.example.gabrieluliano.my_sick_app.search.ClothesSearch">
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="261dp"
-        android:layout_below="@+id/men">
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="482dp"
+        android:layout_alignParentTop="true">
+
 
         <ImageView
             android:layout_width="wrap_content"
@@ -54,26 +57,151 @@
 
     </LinearLayout>
 
-    <Button
-        android:text="Food"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="111dp"
-        android:id="@+id/women"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="17dp" />
+        android:layout_alignParentStart="true">
 
-    <Button
-        android:text="Clothes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/women"
-        android:layout_marginTop="28dp"
-        android:id="@+id/men"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="17dp"
-        android:layout_alignStart="@+id/women" />
+        <TextView
+            android:text="Select Category"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:id="@+id/spinnerMen" />
+
+        <TextView
+            android:text="Optional Filters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:id="@+id/textView7"
+            android:textColor="?android:attr/colorActivatedHighlight" />
+
+        <TextView
+            android:text="Select Colour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="25dp"
+            android:id="@+id/textView13" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_below="@+id/selectColour"
+            android:layout_above="@+id/printinfo"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/black"
+                android:id="@+id/black"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/white"
+                android:id="@+id/white"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/red"
+                android:id="@+id/red"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/orange"
+                android:id="@+id/orange"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/yellow"
+                android:id="@+id/yellow"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/green"
+                android:id="@+id/green"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/blue"
+                android:id="@+id/blue"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/purple"
+                android:id="@+id/purple"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pink"
+                android:id="@+id/pink"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <TextView
+            android:text="Enter Brand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="25dp"
+            android:id="@+id/textView11" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/enterBrand"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textColor="?android:attr/colorActivatedHighlight"
+            android:background="@color/cast_expanded_controller_progress_text_color" />
+
+
+        <Button
+            android:text="Search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/men"
+            android:layout_below="@+id/spinnerMen"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="29dp" />
+
+    </LinearLayout>
+
 </RelativeLayout>

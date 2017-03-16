@@ -5,7 +5,7 @@
     android:id="@+id/activity_photo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gabrieluliano.my_sick_app.PhotoActivity">
+    tools:context="com.example.gabrieluliano.my_sick_app.photo.PhotoActivity">
 
 
     <Button
@@ -108,6 +108,15 @@
             android:layout_marginStart="76dp" />
 
     </LinearLayout>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/but2"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="55dp"
+        android:id="@+id/textView4" />
 
 
 </RelativeLayout>

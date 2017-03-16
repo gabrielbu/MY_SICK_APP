@@ -9,15 +9,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.gabrieluliano.my_sick_app.SelectCategory">
+    tools:context="com.example.gabrieluliano.my_sick_app.photo.SelectCategory">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp"
-        android:layout_below="@+id/upload">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -56,45 +55,206 @@
 
     </LinearLayout>
 
-    <Spinner
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="61dp"
+        android:weightSum="1"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="21dp"
-        android:id="@+id/spinnerMen" />
+        android:layout_marginTop="26dp">
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerMen"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="138dp"
-        android:id="@+id/textView" />
+        <TextView
+            android:text="Post title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
 
-    <Button
-        android:text="Print info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="153dp"
-        android:id="@+id/printinfo"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="64dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:id="@+id/enterTitle"
+            android:layout_weight="0.05"
+            android:textColor="?android:attr/colorFocusedHighlight"
+            android:background="@color/cast_expanded_controller_progress_text_color" />
 
-    <Button
-        android:text="upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/printinfo"
-        android:layout_alignStart="@+id/printinfo"
-        android:layout_marginTop="13dp"
-        android:id="@+id/upload"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="64dp" />
+        <TextView
+            android:text="Select a category"
+            android:layout_width="328dp"
+            android:layout_height="25dp"
+            android:id="@+id/textView1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:id="@+id/spinnerMen"
+            android:background="@color/cast_expanded_controller_progress_text_color" />
+
+        <TextView
+            android:text="Brand (Optional)"
+            android:layout_width="332dp"
+            android:layout_height="25dp"
+            android:id="@+id/textView8"
+            android:layout_marginLeft="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/enterBrand"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textColor="?android:attr/colorFocusedHighlight"
+            android:background="@color/cast_expanded_controller_progress_text_color"
+            android:layout_weight="0.08" />
+
+        <TextView
+            android:text="Additional comments (Optional)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView9"
+            android:layout_marginLeft="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/enterComment"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textColor="?android:attr/colorActivatedHighlight"
+            android:background="@color/cast_expanded_controller_progress_text_color"
+            android:layout_weight="0.07" />
+
+        <TextView
+            android:text="Select a colour (Optional)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/selectColour"
+
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/spinnerMen"
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_below="@+id/selectColour"
+            android:layout_above="@+id/printinfo"
+            android:layout_marginBottom="62dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/black"
+                android:id="@+id/black"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/white"
+                android:id="@+id/white"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/red"
+                android:id="@+id/red"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/orange"
+                android:id="@+id/orange"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/yellow"
+                android:id="@+id/yellow"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/green"
+                android:id="@+id/green"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/blue"
+                android:id="@+id/blue"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/purple"
+                android:id="@+id/purple"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pink"
+                android:id="@+id/pink"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <Button
+            android:text="Select place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentStart="true"
+
+            android:layout_marginTop="53dp"
+            android:id="@+id/printinfo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/colorTop"
+            android:textColor="@color/cast_expanded_controller_progress_text_color" />
+
+        <Button
+            android:text="upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/printinfo"
+            android:layout_alignStart="@+id/printinfo"
+            android:layout_marginTop="13dp"
+            android:id="@+id/upload"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/colorTop"
+            android:textColor="@color/cast_expanded_controller_progress_text_color" />
+
+    </LinearLayout>
 
 </RelativeLayout>

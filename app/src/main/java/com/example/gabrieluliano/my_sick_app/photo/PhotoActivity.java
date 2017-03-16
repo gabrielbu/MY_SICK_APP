@@ -1,11 +1,11 @@
-package com.example.gabrieluliano.my_sick_app;
+package com.example.gabrieluliano.my_sick_app.photo;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,18 +19,16 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+//
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -40,17 +38,19 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gabrieluliano.helper.SQLiteHandler;
 import com.example.gabrieluliano.helper.SessionManager;
+import com.example.gabrieluliano.my_sick_app.BuildConfig;
+import com.example.gabrieluliano.helper.GPS_Service;
+import com.example.gabrieluliano.my_sick_app.home.HomeActivity;
+import com.example.gabrieluliano.my_sick_app.location.LocationActivity;
+import com.example.gabrieluliano.my_sick_app.home.MainActivity;
+import com.example.gabrieluliano.my_sick_app.R;
+import com.example.gabrieluliano.my_sick_app.search.ClothesSearch;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -59,14 +59,12 @@ import java.util.Map;
 
 import java.util.UUID;
 
-import static com.example.gabrieluliano.app.AppConfig.URL_UPLOAD;
-
-public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class PhotoActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     ImageView homeNB;
     ImageView locationNB;
     ImageView mainNB;
     ImageView searchNB;
-
+    TextView txt;
     private Button button;
     private String encoded_string, image_name;
     private Bitmap bitmap;
@@ -96,10 +94,19 @@ public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallba
 
     String userID;
     String imageName;
-    String Coordinate;
+    String Coordinate="0";
+    String CoordinateAPI;
+    String longAPI;
+    String latAPI;
+    Double test;
+
+
 
     ImageView mImageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    Location mLastLocation;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,11 +116,8 @@ public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallba
         btn2 = (Button)findViewById(R.id.but2);
         textView = (TextView)findViewById(R.id.textView3);
         mImageView = (ImageView)findViewById(R.id.imageView);
-/*
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-*/
+        txt = (TextView)findViewById(R.id.textView4);
+
         //PERMISSIONS
         requestStoragePermission();
 
@@ -132,9 +136,24 @@ public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallba
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PhotoActivity.this, SelectCategory.class);
-                i.putExtra("dbData",userID+"@"+imageName+"@"+Coordinate);
-                startActivity(i);
+                // Try to go into next method with normal GPS function
+
+
+                if(!Coordinate.equals("0")) {
+                    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
+                    Intent i = new Intent(PhotoActivity.this, SelectCategory.class);
+                    i.putExtra("dbData", userID + "@" + imageName + "@" + Coordinate);
+                    startActivity(i);
+                    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22");
+                }
+                // Catch exception where Coordinates are not given
+                else{
+                    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@3");
+                    Intent i = new Intent(PhotoActivity.this, SelectCategory.class);
+                    i.putExtra("dbData", userID + "@" + imageName + "@" + CoordinateAPI);
+                    startActivity(i);
+                    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@33");
+                }
             }
         });
 
@@ -187,10 +206,67 @@ public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallba
             enableButton();
 
 
+        //This is another way of getting location through the google API (works better on phone)
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks((GoogleApiClient.ConnectionCallbacks) this)
+                    .addOnConnectionFailedListener((GoogleApiClient.OnConnectionFailedListener) this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
     }
 
 
+    //######################### COORDINATES WITH API ##########################
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
 
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        requestLocation();
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+
+            return;
+        }
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+            latAPI = String.valueOf(mLastLocation.getLatitude());
+            longAPI = String.valueOf(mLastLocation.getLongitude());
+            txt.setText(String.valueOf(mLastLocation.getLongitude()));
+            CoordinateAPI = longAPI +" "+latAPI;
+            test = mLastLocation.getLongitude();
+
+
+        }
+    }
+    @Override
+    public void onConnectionSuspended( int i ){
+
+    }
+    @Override
+    public void onConnectionFailed( ConnectionResult connectionResult ){
+        if( connectionResult.hasResolution() ){
+            try {
+                // Start an Activity that tries to resolve the error
+                connectionResult.startResolutionForResult(PhotoActivity.this, 3);
+            }catch( IntentSender.SendIntentException e ){
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("failed");
+        }
+
+
+
+
+    }
 
     //############################## COORDINATES ##############################
 
@@ -242,36 +318,26 @@ public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallba
 
 
 
-
-
-
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Sydney, Australia, and move the camera.
-        LatLng sydney = new LatLng(Long,Lat );
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
-
-
-
     //############################## IMAGE ##############################
 
     private class Encode_image extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
+            try{
+            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(file_uri));
 
-            bitmap = BitmapFactory.decodeFile(file_uri.getPath());
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             bitmap.recycle();
 
             byte[] array = stream.toByteArray();
             encoded_string = Base64.encodeToString(array, 0);
-            return null;
+            return null;}
+
+            catch(Exception e){
+                System.out.println("@@@@error");
+                return null;
+            }
         }
 
         @Override
@@ -280,7 +346,7 @@ public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallba
         }
     }
     private void makeRequest() {
-        System.out.println(encoded_string);
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, POST_URL,
                 new Response.Listener<String>() {
@@ -307,6 +373,7 @@ public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallba
     }
 
     private void getFileUri() {
+
         String uuid = UUID.randomUUID().toString();
         imageName=uuid;
 
@@ -315,7 +382,10 @@ public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallba
                 + File.separator + image_name
         );
 
-        file_uri = Uri.fromFile(file);
+        //file_uri = Uri.fromFile(file);
+        file_uri = FileProvider.getUriForFile(PhotoActivity.this,
+                BuildConfig.APPLICATION_ID + ".provider",
+                file);
     }
 
 
@@ -427,7 +497,7 @@ public class PhotoActivity extends AppCompatActivity implements OnMapReadyCallba
         finish();
     }
     private void searchScene(){
-        Intent intent = new Intent(PhotoActivity.this, FoodOrClothesActivity.class);
+        Intent intent = new Intent(PhotoActivity.this, ClothesSearch.class);
         startActivity(intent);
         finish();
     }

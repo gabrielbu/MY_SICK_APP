@@ -1,4 +1,4 @@
-package com.example.gabrieluliano.my_sick_app;
+package com.example.gabrieluliano.my_sick_app.other;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,6 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.gabrieluliano.my_sick_app.home.HomeActivity;
+import com.example.gabrieluliano.my_sick_app.location.LocationActivity;
+import com.example.gabrieluliano.my_sick_app.home.MainActivity;
+import com.example.gabrieluliano.my_sick_app.R;
+import com.example.gabrieluliano.my_sick_app.photo.PhotoActivity;
+import com.example.gabrieluliano.my_sick_app.search.ClothesSearch;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -35,7 +42,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         locationNB = (ImageView) findViewById(R.id.iv_location);
         photoNB = (ImageView) findViewById(R.id.iv_photo);
         mainNB = (ImageView) findViewById(R.id.iv_user);
-        foodBT = (Button) findViewById(R.id.women);
+
         clothesBT = (Button) findViewById(R.id.men);
 
         homeNB.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +87,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
-
+//
     private void getAllImages() {
         class GetAllImages extends AsyncTask<String,Void,String> {
             ProgressDialog loading;

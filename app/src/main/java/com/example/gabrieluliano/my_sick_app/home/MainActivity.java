@@ -1,23 +1,24 @@
-package com.example.gabrieluliano.my_sick_app;
+package com.example.gabrieluliano.my_sick_app.home;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gabrieluliano.app.AppConfig;
 import com.example.gabrieluliano.helper.SQLiteHandler;
 import com.example.gabrieluliano.helper.SessionManager;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.GoogleApiActivity;
+import com.example.gabrieluliano.my_sick_app.facebook.FacebookHome;
+import com.example.gabrieluliano.my_sick_app.facebook.FacebookMain;
+import com.example.gabrieluliano.my_sick_app.facebook.FacebookShare;
+import com.example.gabrieluliano.my_sick_app.login.LoginActivity;
+import com.example.gabrieluliano.my_sick_app.R;
+import com.example.gabrieluliano.my_sick_app.location.LocationActivity;
+import com.example.gabrieluliano.my_sick_app.photo.PhotoActivity;
+import com.example.gabrieluliano.my_sick_app.search.ClothesSearch;
 
 import java.util.HashMap;
 
@@ -112,12 +113,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void homeScene(){
-        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        Intent intent = new Intent(MainActivity.this, FacebookShare.class);
         startActivity(intent);
         finish();
     }
     private void searchScene(){
-        Intent intent = new Intent(MainActivity.this, SearchList.class);
+        Intent intent = new Intent(MainActivity.this, ClothesSearch.class);
         startActivity(intent);
         finish();
     }

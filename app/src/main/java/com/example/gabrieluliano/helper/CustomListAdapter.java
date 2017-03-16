@@ -1,4 +1,4 @@
-package com.example.gabrieluliano.my_sick_app;
+package com.example.gabrieluliano.helper;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.gabrieluliano.my_sick_app.R;
+import com.example.gabrieluliano.my_sick_app.search.SearchSelected;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -42,6 +47,10 @@ public class CustomListAdapter extends ArrayAdapter<Product> {
         final String category = product.getCategory();
         final String locationX = product.getLocationX();
         final String locationY = product.getLocationY();
+        final String title = product.getTitle();
+        final String brand = product.getBrand();
+        final String colour = product.getColour();
+        final String username = product.getUserName();
 
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.imageViewProduct);
@@ -51,12 +60,12 @@ public class CustomListAdapter extends ArrayAdapter<Product> {
 
 
         TextView txtName = (TextView) convertView.findViewById(R.id.txtName);
-        txtName.setText(product.getUserID());
+        txtName.setText(product.getUserName());
 
 
 
         TextView txtPrice = (TextView) convertView.findViewById(R.id.txtPrice);
-        txtPrice.setText(product.getCategory());
+        txtPrice.setText(product.getTitle());
 
         txtName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +77,10 @@ public class CustomListAdapter extends ArrayAdapter<Product> {
                 intent.putExtra("category", category);
                 intent.putExtra("locationX",locationX);
                 intent.putExtra("locationY", locationY);
+                intent.putExtra("title", title);
+                intent.putExtra("brand", brand);
+                intent.putExtra("colour", colour);
+                intent.putExtra("username", username);
                 context.startActivity(intent);
 
             }
@@ -75,6 +88,9 @@ public class CustomListAdapter extends ArrayAdapter<Product> {
 
         return convertView;
     }
+
+
+
 
 
 }
