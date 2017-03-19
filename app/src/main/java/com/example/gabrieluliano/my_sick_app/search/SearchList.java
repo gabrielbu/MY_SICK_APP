@@ -93,7 +93,7 @@ public class SearchList extends AppCompatActivity {
 
         }
 
-        class ReadJSON extends AsyncTask<String, Integer, String> {
+        public class ReadJSON extends AsyncTask<String, Integer, String> {
 
             @Override
             protected String doInBackground(String... params) {
@@ -105,6 +105,7 @@ public class SearchList extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(content);
                     JSONArray jsonArray =  jsonObject.getJSONArray("photos");
+
 
                     for(int i =0;i<jsonArray.length(); i++){
                         JSONObject productObject = jsonArray.getJSONObject(i);
@@ -118,8 +119,11 @@ public class SearchList extends AppCompatActivity {
                                 productObject.getString("brand"),
                                 productObject.getString("colour"),
                                 productObject.getString("username")
+
                         ));
                     }
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

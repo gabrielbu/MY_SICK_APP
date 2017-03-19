@@ -51,4 +51,13 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/aqua"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="178dp"
+        android:id="@+id/imageView3" />
 </RelativeLayout>

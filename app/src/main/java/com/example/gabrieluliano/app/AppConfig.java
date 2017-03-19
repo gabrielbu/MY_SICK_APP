@@ -8,6 +8,8 @@ public class AppConfig {
 
 	public static String IMAGE_UPLOAD = "http://ec2-54-194-183-72.eu-west-1.compute.amazonaws.com/save_image.php";
 
+	public static String SAVE_PROFILE_PIC = "http://ec2-54-194-183-72.eu-west-1.compute.amazonaws.com/profilepics/saveprofile.php";
+
 	public static String URL_UPLOAD = "http://ec2-54-194-183-72.eu-west-1.compute.amazonaws.com/sendtest.php";
 
 	public static String HOME = "HomeActivity";

@@ -15,6 +15,7 @@ public class Product {
     private String colour;
     private String userName;
 
+
     public Product(String image, String userID, String category, String locationX, String locationY, String title, String brand, String colour, String userName) {
         this.image = image;
         this.userID = userID;
@@ -25,6 +26,7 @@ public class Product {
         this.brand = brand;
         this.colour = colour;
         this.userName = userName;
+
     }
 
     public String getImage() {
@@ -95,5 +97,6 @@ public class Product {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
 
 }

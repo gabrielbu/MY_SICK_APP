@@ -27,6 +27,7 @@ import com.example.gabrieluliano.my_sick_app.search.ClothesSearch;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,10 +39,11 @@ public class SelectCategory extends AppCompatActivity implements AdapterView.OnI
     String db;
     TextView txt, selectColour;
     private final int REQUEST_CODE_PLACEPICKER = 1;
-    String userID, fileName, fileLocation, locationX, locationY, category, COLOUR, BRAND, COMMENT, TITLE;
+    String userID, fileName, fileLocation, locationX, locationY, category, COLOUR, BRAND, COMMENT, TITLE, CALENDAR;
     ImageView homeNB, searchNB, locationNB, photoNB, black, white, red, orange, yellow, green, blue, purple, pink;
     Button bt, upload;
     EditText enterComment, enterBrand, enterTitle;
+    Calendar calendar;
 
     public static final String KEY_NAME = "name";
     public static final String KEY_USERID = "userID";
@@ -64,6 +66,7 @@ public class SelectCategory extends AppCompatActivity implements AdapterView.OnI
         COMMENT = "NULL";
         TITLE = "NULL";
 
+        calendar.getInstance();
         homeNB  = (ImageView) findViewById(R.id.iv_home);
         locationNB = (ImageView) findViewById(R.id.iv_location);
         photoNB = (ImageView) findViewById(R.id.iv_photo);
@@ -243,7 +246,7 @@ public class SelectCategory extends AppCompatActivity implements AdapterView.OnI
         String ltlg = placeSelected.getLatLng().toString();
         String one = placeSelected.getPhoneNumber().toString();
 
-
+//write about this in the report
         String [] newLtLg = ltlg.split(",");
         locationY = newLtLg[0].replaceAll("[^0-9|^\\.|^\\-]","");
         locationX = newLtLg[1].replaceAll("[^0-9|^\\.|^\\-]","");
@@ -281,6 +284,7 @@ public class SelectCategory extends AppCompatActivity implements AdapterView.OnI
             params.put(KEY_BRAND, BRAND);
             params.put(KEY_COMMENT, COMMENT);
             params.put(KEY_COLOUR, COLOUR);
+
             return params;
         }};
         RequestQueue requestQueue = Volley.newRequestQueue(this);

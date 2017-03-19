@@ -30,6 +30,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 	private static final String KEY_UID = "uid";
 	private static final String KEY_CREATED_AT = "created_at";
 
+
 	public SQLiteHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}

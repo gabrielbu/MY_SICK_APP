@@ -10,6 +10,7 @@ import com.example.gabrieluliano.my_sick_app.location.LocationActivity;
 import com.example.gabrieluliano.my_sick_app.R;
 import com.example.gabrieluliano.my_sick_app.photo.PhotoActivity;
 import com.example.gabrieluliano.my_sick_app.search.ClothesSearch;
+import com.squareup.picasso.Picasso;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class HomeActivity extends AppCompatActivity {
     ImageView photoNB;
     ImageView mainNB;
     ImageView searchNB;
+    ImageView pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,8 @@ public class HomeActivity extends AppCompatActivity {
         photoNB = (ImageView) findViewById(R.id.iv_photo);
         mainNB = (ImageView) findViewById(R.id.iv_user);
         searchNB = (ImageView) findViewById(R.id.iv_search);
+        pic = (ImageView) findViewById(R.id.imageView3);
+        Picasso.with(getApplicationContext()).load("http://ubuntu@ec2-54-194-183-72.eu-west-1.compute.amazonaws.com/profilepics/images/e161f3e1-1999-4a4b-9c57-e86bb53395c7.jpg").into(pic);
 
 
         locationNB.setOnClickListener(new View.OnClickListener() {
